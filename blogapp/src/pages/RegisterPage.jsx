@@ -1,9 +1,9 @@
 import React from 'react'
 
-const LoginPage = () => {
+const RegisterPage = () => {
   return (
-    <form className='login'>
-        <h1>Login</h1>
+    <form className='register'>
+        <h1>Register</h1>
         <input type="text" placeholder='username'/>
         <input type="password" placeholder='password'/>
         <button>Login</button>
@@ -11,4 +11,4 @@ const LoginPage = () => {
   )
 }
 
-export default LoginPage
+export default RegisterPage
