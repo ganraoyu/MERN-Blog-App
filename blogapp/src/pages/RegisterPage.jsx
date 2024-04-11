@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const RegisterPage = () => {
 
@@ -28,7 +28,7 @@ const RegisterPage = () => {
           placeholder='password'
           value={password} 
           onChange={event => setPassword(event.target.value)}/>
-        <button>Login</button>
+        <button>Register</button>
     </form>
   )
 }
