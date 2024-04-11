@@ -3,8 +3,9 @@ const cors = require('cors')
 const mongoose = require('mongoose');
 const User = require('./models/User');
 const app = express();
+const bcrypt = require('bcryptjs');
 
-
+const salt = bcrypt.genSaltSync(10);
 app.use(cors());
 app.use(express.json());
 
@@ -13,7 +14,9 @@ mongoose.connect('mongodb+srv://ganraoyu:071011Vz@cluster0.nh4trn5.mongodb.net/?
 app.post('/register',  async (request, response) => {
     const {username, password} = request.body;
     try{
-        const userDoc = await User.create({username, password});
+        const userDoc = await User.create({
+            username, 
+            password: bcrypt.hashSync(password, salt)});
         response.json(userDoc);
     } catch(exception){
         response.status(400).json({exception});
