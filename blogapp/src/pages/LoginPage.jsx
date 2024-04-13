@@ -20,10 +20,9 @@ const LoginPage = () => {
     } else {
       alert('login failed')
     }
-  }
     if (redirect){
       return <Navigate to='/' />
-    
+    }
   }
   return (
     <form className='login' onSubmit={login}>
