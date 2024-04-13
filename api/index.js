@@ -19,10 +19,17 @@ app.post('/register',  async (request, response) => {
             password: bcrypt.hashSync(password, salt)});
         response.json(userDoc);
     } catch(exception){
+        console.log(exception)
         response.status(400).json({exception});
     }
 });
 
+app.post('/login', async (request, response) => {
+    const {username, password} = request.body;
+    const userDoc = await User.findOne({username});
+    response.json(userDoc);
+});
+
 app.listen(4000);
 
-//mongodb+srv://ganraoyu:<password>@cluster0.nh4trn5.mongodb.net/?retryWrites=true&w=majority
+//mongodb+srv://ganraoyu:<password>@cluster0.nh4trn5.mongodb.net/?retryWrites=true&w=majorityx
