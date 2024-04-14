@@ -21,7 +21,7 @@ const LoginPage = () => {
     if (response.ok){
       response.json().then(userInfo => {
         setUserInfo(userInfo)
-        setRedirect(true);
+        setRedirect(false);
       })
     } else {
       alert('login failed')
