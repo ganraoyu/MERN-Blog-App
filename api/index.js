@@ -62,13 +62,11 @@ app.post('/logout', (request, response) => {
 })
 
 app.post('/post', uploadMiddleware.single('file'), (request, response) => {
-    const { originalname, path } = request.file;
-    const parts = originalname.split('.');
-    const extension = parts.pop();
-    const filename = parts.join('.');
-    const newPath = `${path}.${extension}`;
-    fs.renameSync(path, newPath);
-    response.json({ extension });
+    const {originalname, path} = request.file;
+    const parts = originalname.split('.')
+    const extention = parts[parts.length -  1]
+    fs.renameSync(path, path+'.'+extention)
+    response.json({extention});
 });
 
 app.listen(4000);
