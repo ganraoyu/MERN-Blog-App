@@ -51,6 +51,11 @@ app.get('/profile', (request, response) => {
         response.json(info);
     });
 });
+
+app.post('/logout', (request, response) => {
+    response.cookie('token', '').json('ok');
+})
+
 app.listen(4000);
 
 //mongodb+srv://ganraoyu:<password>@cluster0.nh4trn5.mongodb.net/?retryWrites=true&w=majorityx
