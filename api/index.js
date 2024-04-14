@@ -37,7 +37,10 @@ app.post('/login', async (request, response) => {
     if (passOk){
         jsonWebToken.sign({username, id:userDoc._id}, secret, {}, (err, token) => {
             if(err) throw err;
-            response.cookie('token', token).json('ok');
+            response.cookie('token', token).json({
+                id: userDoc._id,
+                username,
+            });
         });
     } else {
         response.status(400).json("wrong username or password") 

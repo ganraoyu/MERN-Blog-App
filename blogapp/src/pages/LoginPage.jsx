@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Navigate } from 'react-router-dom';
-const LoginPage = () => {
+import { UserContext } from '../UserContext';
 
+const LoginPage = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [redirect, setRedirect] = useState(false)
+  const {setUserInfo} = useContext(UserContext)
+
   async function login(event){
     event.preventDefault()
     const response = await fetch('http://localhost:4000/login', {
@@ -16,14 +19,19 @@ const LoginPage = () => {
     });
     console.log('login success')
     if (response.ok){
-      setRedirect(true);
+      response.json().then(userInfo => {
+        setUserInfo(userInfo)
+        setRedirect(true);
+      })
     } else {
       alert('login failed')
     }
-    if (redirect){
-      return <Navigate to='/' />
-    }
   }
+
+  if (redirect){
+    return <Navigate to='/' />
+  }
+
   return (
     <form className='login' onSubmit={login}>
         <h1>Login</h1>
