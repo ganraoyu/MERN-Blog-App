@@ -76,8 +76,6 @@ app.post('/post', uploadMiddleware.single('file'), async (request, response) => 
     response.json(postDoc);
 });
 
-app.get()
-
 app.listen(4000);
 
 //mongodb+srv://ganraoyu:<password>@cluster0.nh4trn5.mongodb.net/?retryWrites=true&w=majorityx
