@@ -1,6 +1,7 @@
 import React from 'react';
+import {format} from 'date-fns';
 
-const Post = ({ title, summary, cover, content }) => {
+const Post = ({ title, summary, cover, content, createdAt }) => {
   return (
     <div className="post">
       <div className="image">
@@ -10,7 +11,7 @@ const Post = ({ title, summary, cover, content }) => {
         <h2>{title}</h2>
         <p className='info'>
           <a className='author'>Vincent Zhong</a>
-          <time>2024-04-09 16:45</time>
+          <time>{format(new Date(createdAt), 'MMM d, yyyy, HH:mm')}</time>
         </p>
         <p className='summary'>
           {summary}
