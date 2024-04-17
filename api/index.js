@@ -17,6 +17,7 @@ const secret = '5u4dhbyi8na4wgrsem46w2b3'
 app.use(cors({credentials:true, origin:'http://localhost:5173'}));
 app.use(express.json());
 app.use(cookieParser());
+app.use("/uploads", express.static(__dirname + '/uploads'));
 
 mongoose.connect('mongodb+srv://ganraoyu:071011Vz@cluster0.nh4trn5.mongodb.net/?retryWrites=true&w=majority')
 
@@ -80,7 +81,7 @@ app.post('/post', uploadMiddleware.single('file'), (request, response) => {
             return;
         }
 
-        const {title, summary, content} = request.body;
+        const {title, summary, content, cover} = request.body;
         try {
             const postDoc = await Post.create({
                 title, summary, content, cover: newPath, author: info.id,
@@ -93,10 +94,11 @@ app.post('/post', uploadMiddleware.single('file'), (request, response) => {
 });
  
 app.get('/post', async (request, response) => {
-    response.json(await Post.find()
-    .populate('author')
-    .sort({createdAt: -1}))
-    .limit(20)
+    const posts = await Post.find()
+        .populate('author')
+        .sort({createdAt: -1})
+        .limit(20);
+    response.json(posts);
 });
 
 app.listen(4000);
