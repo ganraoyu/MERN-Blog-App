@@ -38,7 +38,7 @@ const Header = () => {
         <>
         <Link to="/create">Create New Post</Link>
         <a className="logout" onClick={logout}>Logout</a>
-        <Link to="/profile">Profile</Link>
+        <Link to="/profile"><img src={account} alt='Account' className='ProfileImage'/></Link>
         </>
       )}
       {!username && (
