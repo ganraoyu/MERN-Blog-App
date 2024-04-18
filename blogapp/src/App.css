@@ -12,7 +12,7 @@ img{
 
 main{
     padding:10px;
-    max-width: 9600px;
+    max-width: 960px;
     margin: 0 auto;
 }
 
@@ -118,7 +118,7 @@ div.post div.text a{
 }
 
 div.post-page div.image{
-    max-height:200px;
+    max-height:350px;
     display:flex;
     overflow:hidden;
 }
@@ -156,4 +156,19 @@ div.post-page div.author{
 
 div.post-page div.content p{
     line-height:1.6rem;
+}
+
+div.edit-row{
+    text-align: center;
+    margin: 20px;
+}
+
+div.post-page a.edit-btn{
+    background-color: #555;
+    align-items: center;
+    color:#fff;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
 }
