@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { UserContext } from './UserContext'
-
+import account from './assets/account.png';
 const Header = () => {
   const {setUserInfo, userInfo} = useContext(UserContext);
   
@@ -9,9 +9,13 @@ const Header = () => {
     fetch('http://localhost:4000/profile', {
       credentials: 'include'
     }).then(response => {
-      response.json().then(userInfo => {
-        setUserInfo(userInfo)
-      })
+      if (response.ok) {
+        response.json().then(userInfo => {
+          setUserInfo(userInfo)
+        })
+      } else {
+        setUserInfo(null)
+      }
     })
   }, [])
 
@@ -19,8 +23,9 @@ const Header = () => {
     fetch('http://localhost:4000/logout', {
       credentials: 'include',
       method: 'POST'
+    }).then(() => {
+      setUserInfo(null)
     })
-    setUserInfo(null)
   }
 
   const username = userInfo?.username
@@ -33,12 +38,14 @@ const Header = () => {
         <>
         <Link to="/create">Create New Post</Link>
         <a className="logout" onClick={logout}>Logout</a>
+        <Link to="/profile">Profile</Link>
         </>
       )}
       {!username && (
         <>
-        <Link to="login">Login</Link>
-        <Link to="register">Register</Link>
+        <Link to="/login">Login</Link>
+        <Link to="/register">Register</Link>
+        <Link to="/profile"><img src={account} alt='Account' className='ProfileImage'/></Link>
         </>
       )}
     </nav>

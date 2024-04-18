@@ -172,3 +172,10 @@ div.post-page a.edit-btn{
     text-decoration: none;
     display: inline-block;
 }
+
+.ProfileImage {
+    width: 35px;
+    height: 35px;
+    align-self: center;
+    transform: translateY(-4px);
+}
