@@ -179,3 +179,8 @@ div.post-page a.edit-btn{
     align-self: center;
     transform: translateY(-8px);
 }
+
+.EditPostH1{
+    text-align: center;
+    margin: 10px 0;
+}
