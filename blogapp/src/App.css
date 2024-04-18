@@ -111,3 +111,39 @@ div.post div.text a{
     text-decoration: none;
     color: #333;
 }
+
+div.post-page div.image{
+    max-height:200px;
+    display:flex;
+    overflow:hidden;
+}
+
+div.post-page div.image img{
+    object-fit: cover;
+    object-position: center center;
+}
+
+div.post-page a{
+    color:#333;
+    text-decoration: underline;
+}
+
+div.post-page h1{
+    text-align: center;
+    margin:10px 0 5px;
+}
+
+div.post-page time{
+    text-align: center;
+    display:block;
+    font-size: 0.7rem;
+    color:#aaa;
+}
+
+div.post-page div.author{
+    text-align: center;
+    display:block;
+    margin-bottom:20px;
+    font-size: 0.7rem;
+    font-weight:bold;
+}
