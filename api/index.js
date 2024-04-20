@@ -93,6 +93,17 @@ app.post('/post', uploadMiddleware.single('file'), (request, response) => {
     });
 });
  
+app.put('/post', uploadMiddleware.single('file'), async (request, response) => {
+    let newPath = null;
+    if(request.file){
+        const {originalname, path} = request.file;
+        const parts = originalname.split('.')
+        const extension = parts[parts.length -  1]
+        newPath = path + '.' + extension; 
+        fs.renameSync(path, newPath);
+    }
+});
+
 app.get('/post', async (request, response) => {
     const posts = await Post.find()
         .populate('author')

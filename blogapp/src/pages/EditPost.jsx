@@ -27,12 +27,29 @@ const EditPost = () => {
         })
     }, [])
 
-    function updatePost(event){
+    async function updatePost(event){
         event.preventDefault();
+        const data = new FormData()
+        data.set('title', title)
+        data.set('summary', summary)
+        data.set('content', content)
+        if(files?.[0]){
+            data.set('files', files?.[0])
+        }
+        data.set('files', files?.[0])
+        const response = await fetch('http://localhost:4000/post', {
+            method: 'PUT',
+            body: data,
+
+        })
+        if(response.ok){
+            setRedirect(true)
+        }
+        //setRedirect(true)
     }
 
     if (redirect){
-        return <Navigate to='/' />
+        return <Navigate to={'/post/'+id} />
     }
   
     return (
