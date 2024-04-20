@@ -67,62 +67,52 @@ app.post('/logout', (request, response) => {
     response.cookie('token', '').json('ok');
 })
 
-app.post('/post', uploadMiddleware.single('file'), (request, response) => {
-    const {originalname, path} = request.file;
-    const parts = originalname.split('.')
-    const extension = parts[parts.length -  1]
-    const newPath = path + '.' + extension; 
+app.post('/post', uploadMiddleware.single('file'), async (req, res) => {
+    const {originalname, path} = req.file;
+    const parts = originalname.split('.');
+    const ext = parts[parts.length - 1];
+    const newPath = path+'.'+ext;
     fs.renameSync(path, newPath);
-    const {token} = request.cookies;
-
+  
+    const {token} = req.cookies;
     jsonWebToken.verify(token, secret, {}, async (err, info) => {
-        if (err) {
-            response.status(500).json({ error: 'Failed to authenticate token.' });
-            return;
-        }
-
-        const {title, summary, content, cover} = request.body;
-        try {
-            const postDoc = await Post.create({
-                title, summary, content, cover: newPath, author: info.id,
-            });
-            response.json(postDoc);
-        } catch (error) {
-            response.status(500).json({ error: 'Failed to create post.' });
-        }
+      if (err) throw err;
+      const {title, summary, content} = req.body;
+      const postDoc = await Post.create({
+        title,
+        summary,
+        content,
+        cover: newPath,
+        author: info.id,
+      });
+      res.json(postDoc);
     });
 });
+  
  
-app.put('/post',uploadMiddleware.single('file'), async (req,res) => {
+app.put('/post', uploadMiddleware.single('file'), async (request, response) => {
     let newPath = null;
-    if (req.file) {
-      const {originalname,path} = req.file;
+    if (request.file) {
+      const {originalname, path} = request.file;
       const parts = originalname.split('.');
       const ext = parts[parts.length - 1];
       newPath = path+'.'+ext;
       fs.renameSync(path, newPath);
     }
-  
-    const {token} = req.cookies;
-    jwt.verify(token, secret, {}, async (err,info) => {
+    const {token} = request.cookies;
+    jsonWebToken.verify(token, secret, {}, async (err, info) => {
       if (err) throw err;
-      const {id,title,summary,content} = req.body;
+      const {id, title, summary, content} = request.body;
       const postDoc = await Post.findById(id);
       const isAuthor = JSON.stringify(postDoc.author) === JSON.stringify(info.id);
-      if (!isAuthor) {
-        return res.status(400).json('you are not the author');
+      if(!isAuthor) {
+        response.status(401).json('not the author');
+        return;
       }
-      await postDoc.update({
-        title,
-        summary,
-        content,
-        cover: newPath ? newPath : postDoc.cover,
-      });
-  
-      res.json(postDoc);
+      await Post.findByIdAndUpdate(id, {title, summary, content, cover: newPath ? newPath : postDoc.cover}, {new: true});
+      response.json({isAuthor, postDoc, info});
     });
-  
-  });
+});
 
 app.get('/post', async (request, response) => {
     const posts = await Post.find()
