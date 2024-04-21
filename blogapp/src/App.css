@@ -184,3 +184,15 @@ div.post-page a.edit-btn{
     text-align: center;
     margin: 10px 0;
 }
+
+
+.ProfilePageDiv{
+    text-align: center;
+    margin: 10px 0;
+    justify-content: center;
+}
+
+.profileImage{
+    width: 100px;
+    height: 100px;
+}   
