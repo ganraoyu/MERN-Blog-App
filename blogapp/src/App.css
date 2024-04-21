@@ -187,9 +187,8 @@ div.post-page a.edit-btn{
 
 
 .ProfilePageDiv{
-    text-align: center;
-    margin: 10px 0;
-    justify-content: center;
+    border: 1px solid #222222;
+    
 }
 
 .profileImage{
