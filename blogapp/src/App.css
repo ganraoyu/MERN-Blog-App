@@ -95,7 +95,7 @@ button{
     background-color: #555;
     border: 0;
     color:#fff;
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 7px;
 }
 
@@ -190,12 +190,13 @@ div.post-page a.edit-btn{
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    border:1px solid #ccc;
     justify-content: center;
 }
 
 .profileImage {
-    max-width: 100px;
+    max-width: 1000px;
+    align-self: center;
+    margin-right: 50px;
 }
 
 .infoAndStatsAndDescription {
@@ -210,7 +211,6 @@ div.post-page a.edit-btn{
     align-items: center;
     justify-content: space-between;
     padding: 10px;
-    
 }
 
 .stats {
@@ -220,5 +220,14 @@ div.post-page a.edit-btn{
 }
 
 .stats div {
-    margin: 0 10px; /* This adds a margin of 10px to the left and right of each item */
+    margin: 0 10px;
+}
+
+.info{
+    gap:10px;
+}
+
+.description {
+    width: 300px;
+    word-wrap: break-word;
 }

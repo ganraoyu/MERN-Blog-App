@@ -7,7 +7,7 @@ const ProfilePage = () => {
       <img src={account} className="profileImage" alt="Account" />
       <div className="infoStatsDescription">
         <div className="info">
-          <div>UserName</div>
+          <div>yaoyu</div>
           <button>Follow</button>
           <button>Message</button>
         </div>
@@ -16,7 +16,7 @@ const ProfilePage = () => {
           <div>0 followers</div>
           <div>0 following</div>
         </div>
-        <div className='description'>Description</div>
+        <div className='description'>Descriptiosdfasdfwefjirwbgowudavnldfijaiodfuhwaeugfwubfiewubgewioyb equhqeiufhiudfiuad f vp eqebf n</div>
       </div>
     </div>
   )
