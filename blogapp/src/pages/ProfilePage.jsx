@@ -16,7 +16,10 @@ const ProfilePage = () => {
           <div>0 followers</div>
           <div>0 following</div>
         </div>
-        <div className='description'>Descriptiosdfasdfwefjirwbgowudavnldfijaiodfuhwaeugfwubfiewubgewioyb equhqeiufhiudfiuad f vp eqebf n</div>
+        <div className='description'>
+          Descriptiosdfasdfwefjirwbgowudavnldfijaiodfuhwaeugfwubfiewubgewioyb equhqeiufhiudfiuad f vp eqebf n
+        </div>
+        <h1>Blog</h1>
       </div>
     </div>
   )
