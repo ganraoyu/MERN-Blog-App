@@ -3,19 +3,21 @@ import account from '../assets/account.png'
 
 const ProfilePage = () => {
   return (
-    <div className= 'ProfilePageDiv'>
-      <img src={account} className="profileImage"alt="Account" />
-      <div>
-        <div>UserName</div>
-        <div>Follow</div>
-        <div>Message</div>
+    <div className='ProfilePageDiv'>
+      <img src={account} className="profileImage" alt="Account" />
+      <div className="infoStatsDescription">
+        <div className="info">
+          <div>UserName</div>
+          <button>Follow</button>
+          <button>Message</button>
+        </div>
+        <div className="stats">
+          <div>0 posts</div>
+          <div>0 followers</div>
+          <div>0 following</div>
+        </div>
+        <div className='description'>Description</div>
       </div>
-      <div>
-        <div>0 Posts</div>
-        <div>0 followers</div>
-        <div>0 following</div>
-      </div>
-      <div>Description</div>
     </div>
   )
 }

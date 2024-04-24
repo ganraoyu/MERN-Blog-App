@@ -186,12 +186,39 @@ div.post-page a.edit-btn{
 }
 
 
-.ProfilePageDiv{
-    border: 1px solid #222222;
+.ProfilePageDiv {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    border:1px solid #ccc;
+    justify-content: center;
+}
+
+.profileImage {
+    max-width: 100px;
+}
+
+.infoAndStatsAndDescription {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.info, .stats {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
     
 }
 
-.profileImage{
-    width: 100px;
-    height: 100px;
-}   
+.stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.stats div {
+    margin: 0 10px; /* This adds a margin of 10px to the left and right of each item */
+}
