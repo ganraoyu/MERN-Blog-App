@@ -23,7 +23,14 @@ const ProfilePage = () => {
         </div>
       </div>
 
-      <div><h1>hi</h1></div>
+      <div className='blogPosts'>
+        <h1 className='h1blog'>Blog</h1>
+        <hr/>
+        <div>
+          <img src={account} className="profileImage" alt="Account" />
+          <div>Blog Title</div>
+        </div>
+      </div>
     </>
   )
 }
