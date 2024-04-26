@@ -3,13 +3,14 @@ const cors = require('cors')
 const mongoose = require('mongoose');
 const User = require('./models/User');
 const Post = require('./models/Post');
+const fs = require('fs');
 const app = express();
 const bcrypt = require('bcryptjs');
 const jsonWebToken = require('jsonwebtoken');
 const cookieParser = require('cookie-parser'); 
 const multer = require('multer');
 const uploadMiddleware = multer({dest: 'uploads/'});
-const fs = require('fs');
+
 
 const salt = bcrypt.genSaltSync(10);
 const secret = '5u4dhbyi8na4wgrsem46w2b3'
@@ -140,9 +141,32 @@ app.get('/profile/:id', async (request, response) => {
       const posts = await Post.find({ author: user._id });
       const followers = await User.countDocuments({ following: user._id });
       const following = user.following.length;
-  
-      // Send the user data along with posts, followers, and following count
+
       response.json({ ...user._doc, posts: posts.length, followers, following });
+    } catch (error) {
+      response.status(500).json({ message: error.message });
+    }
+});
+
+app.post('/follow/:id', async (request, response) => {
+    const { id } = request.params;
+    const { userId } = request.body;
+  
+    try {
+      const user = await User.findById(id);
+      const follower = await User.findById(userId);
+  
+      if (!user || !follower) {
+        return response.status(404).json({ message: 'User not found' });
+      }
+  
+      user.followers.push(follower._id);
+      follower.following.push(user._id);
+  
+      await user.save();
+      await follower.save();
+  
+      response.json({ message: 'Followed successfully' });
     } catch (error) {
       response.status(500).json({ message: error.message });
     }

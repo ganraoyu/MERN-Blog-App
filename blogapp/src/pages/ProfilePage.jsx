@@ -9,9 +9,6 @@ const ProfilePage = () => {
   useEffect(() => {
     fetch(`http://localhost:4000/profile/${id}`)
       .then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
         return response.json();
       })
       .then(data => setProfile(data))
@@ -41,7 +38,6 @@ const ProfilePage = () => {
           </div>
         </div>
       </div>
-
       <div className='blogPosts'>
         <h1 className='h1blog'>Blog</h1>
         <hr/>
