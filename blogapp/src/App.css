@@ -254,11 +254,15 @@ div.post-page a.edit-btn{
 
 .userBlogPosts{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: start;
 }
 
 .UserProfileImage {
     margin-bottom: 10px;
+}
+
+.blogTitle{
+    align-self: flex-start;
 }
 

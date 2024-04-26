@@ -28,8 +28,8 @@ const ProfilePage = () => {
         <hr/>
         <div className='userBlogPosts'>
           <img src={account} className="UserProfileImage" alt="Account" />
-          <div>Blog Title</div>
         </div>
+        <div className='blogTitle'>Blog Title</div>
       </div>
     </>
   )
