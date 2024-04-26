@@ -11,7 +11,11 @@ const UserSchema = new Schema({
     password:{
         type:String,
         required:true,
-    }
+    },
+    posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }],
+    followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    description: String,
 })
 
 const UserModel = model("User", UserSchema);

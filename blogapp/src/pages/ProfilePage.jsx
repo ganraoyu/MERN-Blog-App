@@ -1,24 +1,43 @@
-import React from 'react'
-import account from '../assets/account.png'
+import React, { useState, useEffect } from 'react';
+import account from '../assets/account.png';
+import { useParams } from 'react-router-dom';
 
 const ProfilePage = () => {
+  const { id } = useParams();
+  const [profile, setProfile] = useState(null);
+
+  useEffect(() => {
+    fetch(`http://localhost:4000/profile/${id}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => setProfile(data))
+      .catch(error => console.error('Error:', error));
+  }, [id]);
+
+  if (!profile) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <div className='ProfilePageDiv'>
         <img src={account} className="profileImage" alt="Account" />
         <div className="infoStatsDescription">
           <div className="info">
-            <div>yaoyu</div>
+            <div>{profile.username}</div>
             <button>Follow</button>
             <button>Message</button>
           </div>
           <div className="stats">
-            <div>0 posts</div>
-            <div>0 followers</div>
-            <div>0 following</div>
+            <div>{profile.posts} posts</div>
+            <div>{profile.followers} followers</div>
+            <div>{profile.following} following</div>
           </div>
           <div className='description'>
-            Descriptiosdfasdfwefjirwbgowudavnldfijaiodfuhwaeugfwubfiewubgewioyb equhqeiufhiudfiuad f vp eqebf n
           </div>
         </div>
       </div>
@@ -35,4 +54,4 @@ const ProfilePage = () => {
   )
 }
 
-export default ProfilePage
+export default ProfilePage;

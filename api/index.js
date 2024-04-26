@@ -128,4 +128,25 @@ app.get('/post/:id', async (request, response) => {
     response.json(post);
 });
 
+app.get('/profile/:id', async (request, response) => {
+    const { id } = request.params;
+  
+    try {
+      const user = await User.findById(id).select('-password');
+  
+      if (!user) {
+        return response.status(404).json({ message: 'User not found' });
+      }
+      const posts = await Post.find({ author: user._id });
+      const followers = await User.countDocuments({ following: user._id });
+      const following = user.following.length;
+  
+      // Send the user data along with posts, followers, and following count
+      response.json({ ...user._doc, posts: posts.length, followers, following });
+    } catch (error) {
+      response.status(500).json({ message: error.message });
+    }
+  });
+
+
 app.listen(4000);
