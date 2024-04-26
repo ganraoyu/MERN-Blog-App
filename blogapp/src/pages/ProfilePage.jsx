@@ -26,8 +26,8 @@ const ProfilePage = () => {
       <div className='blogPosts'>
         <h1 className='h1blog'>Blog</h1>
         <hr/>
-        <div>
-          <img src={account} className="profileImage" alt="Account" />
+        <div className='userBlogPosts'>
+          <img src={account} className="UserProfileImage" alt="Account" />
           <div>Blog Title</div>
         </div>
       </div>
