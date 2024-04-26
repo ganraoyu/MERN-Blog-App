@@ -170,7 +170,7 @@ app.post('/follow/:id', async (request, response) => {
     } catch (error) {
       response.status(500).json({ message: error.message });
     }
-  });
+});
 
 
 app.listen(4000);
