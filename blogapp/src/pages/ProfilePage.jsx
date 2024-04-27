@@ -18,10 +18,11 @@ const ProfilePage = () => {
     fetch(`http://localhost:4000/posts/${id}`)
       .then(response => response.json())
       .then(data => {
-        console.log(data);
+        console.log('posts:', data); // Log the posts array
+        console.log('posts:', data); // Log the posts array
+        console.log('posts:', data); // Log the posts array
         setPosts([data]);
       })
-      .catch(error => console.error('Error:', error));
   }, [id]);
 
   if (!profile) {
