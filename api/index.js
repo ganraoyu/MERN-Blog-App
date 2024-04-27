@@ -172,29 +172,6 @@ app.post('/follow/:id', async (request, response) => {
     }
 });
 
-app.put('/profile/:id', uploadMiddleware.single('file'), async (request, response) => {
-  let newPath = null;
-  if (request.file) {
-    const {originalname, path} = request.file;
-    const parts = originalname.split('.');
-    const ext = parts[parts.length - 1];
-    newPath = path+'.'+ext;
-    fs.renameSync(path, newPath);
-  }
-  const {token} = request.cookies;
-  jsonWebToken.verify(token, secret, {}, async (err, info) => {
-    if (err) throw err;
-    const {id, title, summary, content} = request.body;
-    const postDoc = await Post.findById(id);
-    const isAuthor = JSON.stringify(postDoc.author) === JSON.stringify(info.id);
-    if(!isAuthor) {
-      response.status(401).json('not the author');
-      return;
-    }
-    await Post.findByIdAndUpdate(id, {title, summary, content, cover: newPath ? newPath : postDoc.cover}, {new: true});
-    response.json({isAuthor, postDoc, info});
-  });
-});
 
 
 app.listen(4000);
